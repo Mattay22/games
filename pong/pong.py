@@ -139,13 +139,7 @@ while True:
         pen.write("Christine: {}  Legend: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))    
         pen1.write("well done big matty", align="left", font=("Courier", 24, "normal"))
         
-#physics #28mins in video
 
-  #  if ball.xcor() < -340 and ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() > paddle_a.ycor() - 50:
-  #      ball.dx *= -1
-    
-   # if ball.xcor() > 340 and ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50:
-  #      ball.dx *= -1
 
     if ball.xcor() < -340 and ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() > paddle_a.ycor() - 50:
         ball.dx *= -1
