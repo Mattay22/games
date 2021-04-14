@@ -7,10 +7,15 @@ wn.bgcolor("blue")
 wn.setup(width=800, height=600)
 wn.tracer(0)
 
+
 ###score
 
 score_a = 0
 score_b = 0
+
+###difficulty
+ballx = (ball.dx = 0.1)
+bally = (ball.dy = 0.1)
 
 
 #padle A
@@ -32,8 +37,8 @@ ball.shape("circle")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 0.1
-ball.dy = 0.1
+ballx = {}
+bally = {}
 
 ###pen
 
@@ -91,6 +96,8 @@ while True:
         ball.goto(0, 0)
         ball.dx *= -1
         score_b += 1
+        ballx += 0.1
+        bally += 0.1
         pen.clear()
         pen.write("Legend: {}".format(score_b), align="center", font=("Courier", 24, "normal"))
 
