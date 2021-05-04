@@ -57,10 +57,10 @@ for row in range(20):
 
 #create boundary
 for tile in range(0, 20):
-	world_data[19][tile] = 2
-	world_data[0][tile] = 1
-	world_data[tile][0] = 1
-	world_data[tile][19] = 1
+	world_data[19][tile] = 10
+	world_data[0][tile] = 10
+	world_data[tile][0] = 10
+	world_data[tile][19] = 10
 
 #function for outputting text onto the screen
 def draw_text(text, font, text_col, x, y):
@@ -160,7 +160,7 @@ while run:
 
 	#draw background
 	screen.fill(green)
-	screen.blit(bg_img, (0, 0))
+	screen.blit(icebg_img, (0, 0))
 	screen.blit(sun_img, (tile_size * 2, tile_size * 2))
 
 	#load and save level

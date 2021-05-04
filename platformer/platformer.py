@@ -23,7 +23,7 @@ tile_size = 50
 game_over = 0
 main_menu = True
 level = 1
-max_levels = 3
+max_levels = 3#4
 score = 0
 
 #define colours
@@ -35,6 +35,8 @@ bg_img = pygame.image.load('background.png')
 start_img = pygame.image.load('start_btn.png')
 exit_img = pygame.image.load('exit_btn.png')
 restart_img = pygame.image.load('restart_btn.png')
+icebg_img = pygame.image.load('background2.png')
+jungle_img = pygame.image.load('background3.png')
 
 def draw_text(text, font, text_col, x, y):
     img = font.render(text, True, text_col)
@@ -89,6 +91,8 @@ class Button():
 class Player():
     def __init__(self, x, y):
         self.reset(x, y)
+#        img_left = pygame.transform.flip('player1.png', True, False)
+        self.direction = 0
 
 
     def update(self, game_over):
@@ -108,11 +112,17 @@ class Player():
                 self.jumped = False
             if key[pygame.K_LEFT]:
                 dx -= 5
+                self.direction = -1
             if key[pygame.K_RIGHT]:
                 dx += 5
+                self.direction = 1
 
             
             #handle animation
+     #       if self.direction == 1:
+          #      self.image = img_right
+      #      elif self.direction == -1:
+       #         self.image = img_left
 #            self.index += 1
 #            if self.index >= len(self.images_right):
 #                self.index = 0
@@ -191,9 +201,13 @@ class Player():
         return game_over
 
     def reset(self, x, y):
+#        self.images_right
         img = pygame.image.load('player1.png')
+        
         self.image = pygame.transform.scale(img, (40, 80))
+
         self.rect = self.image.get_rect()
+
                 
 #        self.index = 0
 #        self.counter = 0
@@ -219,6 +233,10 @@ class World():
         #load images
         dirt_img = pygame.image.load('dirt.png')
         grass_img = pygame.image.load('grass.png')
+        ice_img = pygame.image.load('ice.png')
+        iceb_img = pygame.image.load('iceblock.png')
+        jblock_img = pygame.image.load('jblock.png')
+        leaf_img = pygame.image.load('leaf.png')
 
         row_count = 0
         for row in data:
@@ -256,6 +274,34 @@ class World():
                 if tile == 8:
                     exit = Exit(col_count * tile_size,  row_count * tile_size - (tile_size // 2))
                     exit_group.add(exit)
+                if tile == 9:
+                    img = pygame.transform.scale(ice_img, (tile_size, tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    tile = (img, img_rect)
+                    self.tile_list.append(tile)
+                if tile == 10:
+                    img = pygame.transform.scale(iceb_img, (tile_size, tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    tile = (img, img_rect)
+                    self.tile_list.append(tile)
+                if tile == 11:
+                    img = pygame.transform.scale(leaf_img, (tile_size, tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    tile = (img, img_rect)
+                    self.tile_list.append(tile)
+                if tile == 12:
+                    img = pygame.transform.scale(jblock_img, (tile_size, tile_size))
+                    img_rect = img.get_rect()
+                    img_rect.x = col_count * tile_size
+                    img_rect.y = row_count * tile_size
+                    tile = (img, img_rect)
+                    self.tile_list.append(tile)
 
                 col_count += 1
             row_count += 1
@@ -359,7 +405,19 @@ while run:
 
     clock.tick(fps)
 
-    screen.blit(bg_img, (0, 0))
+    
+
+    
+    if level == 1:
+        screen.blit(bg_img, (0, 0))
+    if level == 2:
+        screen.blit(icebg_img, (0, 0))
+    if level == 3:
+        screen.blit(jungle_img, (0, 0))   
+        
+
+
+    
     
     if main_menu == True:
         if exit_button.draw():

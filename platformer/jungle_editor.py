@@ -22,10 +22,10 @@ pygame.display.set_caption('Level Editor')
 #load images
 sun_img = pygame.image.load('sun.png')
 sun_img = pygame.transform.scale(sun_img, (tile_size, tile_size))
-bg_img = pygame.image.load('background.png')
+bg_img = pygame.image.load('background3.png')
 bg_img = pygame.transform.scale(bg_img, (screen_width, screen_height - margin))
-dirt_img = pygame.image.load('dirt.png')
-grass_img = pygame.image.load('grass.png')
+jblock_img = pygame.image.load('jblock.png')
+leaf_img = pygame.image.load('leaf.png')
 blob_img = pygame.image.load('blob.png')
 platform_x_img = pygame.image.load('platform_x.png')
 platform_y_img = pygame.image.load('platform_y.png')
@@ -35,7 +35,7 @@ exit_img = pygame.image.load('exit.png')
 save_img = pygame.image.load('save_btn.png')
 load_img = pygame.image.load('load_btn.png')
 ice_img = pygame.image.load('ice.png')
-icebg_img = pygame.image.load('background2.png')
+icebg_img = pygame.image.load('background3.png')
 iceb_img = pygame.image.load('iceblock.png')
 
 
@@ -57,10 +57,10 @@ for row in range(20):
 
 #create boundary
 for tile in range(0, 20):
-	world_data[19][tile] = 2
-	world_data[0][tile] = 1
-	world_data[tile][0] = 1
-	world_data[tile][19] = 1
+	world_data[19][tile] = 11
+	world_data[0][tile] = 11
+	world_data[tile][0] = 11
+	world_data[tile][19] = 11
 
 #function for outputting text onto the screen
 def draw_text(text, font, text_col, x, y):
@@ -79,13 +79,13 @@ def draw_world():
 	for row in range(20):
 		for col in range(20):
 			if world_data[row][col] > 0:
-				if world_data[row][col] == 1:
+				if world_data[row][col] == 11:
 					#dirt blocks
-					img = pygame.transform.scale(dirt_img, (tile_size, tile_size))
+					img = pygame.transform.scale(jblock_img, (tile_size, tile_size))
 					screen.blit(img, (col * tile_size, row * tile_size))
-				if world_data[row][col] == 2:
+				if world_data[row][col] == 12:
 					#grass blocks
-					img = pygame.transform.scale(grass_img, (tile_size, tile_size))
+					img = pygame.transform.scale(leaf_img, (tile_size, tile_size))
 					screen.blit(img, (col * tile_size, row * tile_size))
 				if world_data[row][col] == 3:
 					#enemy blocks
@@ -160,7 +160,7 @@ while run:
 
 	#draw background
 	screen.fill(green)
-	screen.blit(bg_img, (0, 0))
+	screen.blit(icebg_img, (0, 0))
 	screen.blit(sun_img, (tile_size * 2, tile_size * 2))
 
 	#load and save level
