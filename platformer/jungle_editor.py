@@ -37,6 +37,8 @@ load_img = pygame.image.load('load_btn.png')
 ice_img = pygame.image.load('ice.png')
 icebg_img = pygame.image.load('background3.png')
 iceb_img = pygame.image.load('iceblock.png')
+dirt_img = pygame.image.load('dirt.png')
+grass_img = pygame.image.load('grass.png')
 
 
 #define game variables
@@ -79,13 +81,13 @@ def draw_world():
 	for row in range(20):
 		for col in range(20):
 			if world_data[row][col] > 0:
-				if world_data[row][col] == 11:
+				if world_data[row][col] == 1:
 					#dirt blocks
-					img = pygame.transform.scale(jblock_img, (tile_size, tile_size))
+					img = pygame.transform.scale(dirt_img, (tile_size, tile_size))
 					screen.blit(img, (col * tile_size, row * tile_size))
-				if world_data[row][col] == 12:
+				if world_data[row][col] == 2:
 					#grass blocks
-					img = pygame.transform.scale(leaf_img, (tile_size, tile_size))
+					img = pygame.transform.scale(grass_img, (tile_size, tile_size))
 					screen.blit(img, (col * tile_size, row * tile_size))
 				if world_data[row][col] == 3:
 					#enemy blocks
@@ -119,7 +121,14 @@ def draw_world():
 					#dirt blocks
 					img = pygame.transform.scale(iceb_img, (tile_size, tile_size))
 					screen.blit(img, (col * tile_size, row * tile_size))
-
+				if world_data[row][col] == 11:
+					#dirt blocks
+					img = pygame.transform.scale(jblock_img, (tile_size, tile_size))
+					screen.blit(img, (col * tile_size, row * tile_size))
+				if world_data[row][col] == 12:
+					#grass blocks
+					img = pygame.transform.scale(leaf_img, (tile_size, tile_size))
+					screen.blit(img, (col * tile_size, row * tile_size))
 
 class Button():
 	def __init__(self, x, y, image):
@@ -201,12 +210,12 @@ while run:
 				#update tile value
 				if pygame.mouse.get_pressed()[0] == 1:
 					world_data[y][x] += 1
-					if world_data[y][x] > 10:
+					if world_data[y][x] > 12:
 						world_data[y][x] = 0
 				elif pygame.mouse.get_pressed()[2] == 1:
 					world_data[y][x] -= 1
 					if world_data[y][x] < 0:
-						world_data[y][x] = 10
+						world_data[y][x] = 12
 		if event.type == pygame.MOUSEBUTTONUP:
 			clicked = False
 		#up and down key presses to change level number

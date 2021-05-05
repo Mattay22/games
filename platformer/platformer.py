@@ -12,7 +12,7 @@ screen_width = 1000
 screen_height = 1000
 #### (https://www.youtube.com/watch?v=Ongc4EVqRjo&t=86s)4:30, 9:00 ## part 8 now
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Platformer')
+pygame.display.set_caption('Oopies dreams')
 
 ###define font
 font = pygame.font.SysFont('Bauhaus 93', 70)
@@ -159,9 +159,14 @@ class Player():
             
             if pygame.sprite.spritecollide(self, lava_group, False):
                 game_over = -1
-
-            if pygame.sprite.spritecollide(self, exit_group, False):
+            if level == 1 or level == 2:
+                if pygame.sprite.spritecollide(self, exit_group, False):
+                    game_over = 1
+            #score limit for final level
+            if level == 3 and score >= 8 and pygame.sprite.spritecollide(self, exit_group, False):                
                 game_over = 1
+
+
                 
             ###check for collison with platforms
             for platform in platform_group:
@@ -289,14 +294,14 @@ class World():
                     tile = (img, img_rect)
                     self.tile_list.append(tile)
                 if tile == 11:
-                    img = pygame.transform.scale(leaf_img, (tile_size, tile_size))
+                    img = pygame.transform.scale(jblock_img, (tile_size, tile_size))
                     img_rect = img.get_rect()
                     img_rect.x = col_count * tile_size
                     img_rect.y = row_count * tile_size
                     tile = (img, img_rect)
                     self.tile_list.append(tile)
                 if tile == 12:
-                    img = pygame.transform.scale(jblock_img, (tile_size, tile_size))
+                    img = pygame.transform.scale(leaf_img, (tile_size, tile_size))
                     img_rect = img.get_rect()
                     img_rect.x = col_count * tile_size
                     img_rect.y = row_count * tile_size
@@ -407,7 +412,7 @@ while run:
 
     
 
-    
+    ##level background
     if level == 1:
         screen.blit(bg_img, (0, 0))
     if level == 2:
