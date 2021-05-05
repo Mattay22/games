@@ -1,0 +1,11 @@
+Required 05/05/2021:
+sort out animation
+fix lag on level 1
+tell users they need a minimum of 8 coins to finish
+tidy up code
+
+Would be nice:
+change moving platform pictures
+make highscore
+
+
